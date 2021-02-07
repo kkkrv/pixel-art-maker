@@ -1,16 +1,21 @@
+body {
+    background-color: #ccc;
+}
+
 #canvas {
-    width: 1000px;
+    width: 900px;
     height: 650px;
-    background-color: gainsboro;
+    background-color: #e5e5e5;
     border: lightgrey 1px solid;
     border-radius: 30px;
     box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
-    margin: auto;
+    margin: 30px auto auto;
+    text-align: center;
 }
 
 .element {
     /* display: inline-block; */
-    border: 1px solid #ccc;
+    border: 1px solid #e5e5e5;
     border-width: 0 1px 1px 0;
     width: 9px;
     height: 9px;
@@ -21,7 +26,19 @@
     width: 800px;
     height: 500px;
     background-color: #fff;
-    border: 1px solid #ccc;
+    border: 1px solid #e5e5e5;
     border-width: 1px 0 0 1px;
     margin: 30px auto auto;
+}
+
+#palette {
+    margin: 10px 50px;
+}
+.colorField {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    margin-right: 10px;
+    cursor: pointer;
 }
