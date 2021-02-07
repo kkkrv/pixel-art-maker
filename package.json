@@ -2,7 +2,7 @@
   "name": "pixel-art-maker",
   "version": "1.0.0",
   "description": "In this exercise, you'll create your own pixel art maker which will allow a user to choose colors from a palette and then paint pixel art. The interface is completely up to you, but it could look something like this.",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ."
@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/kmcgrady/pixel-art-maker#readme",
   "devDependencies": {
-    "eslint": "^4.3.0",
+    "eslint": "^4.19.1",
     "eslint-config-kmcgrady": "^10.0.4"
   }
 }
