@@ -1,11 +1,10 @@
 body {
     background-color: #ccc;
+    font-family: 'Poppins', sans-serif;
 }
 
 label {
-    font-family: 'Poppins', sans-serif;
     vertical-align: top;
-    margin-top: 10px;
 }
 
 #canvas {
@@ -37,7 +36,7 @@ label {
 }
 
 #palette {
-    margin: 10px 50px;
+    margin: 20px 50px;
 }
 .colorField {
     display: inline-block;
@@ -70,4 +69,34 @@ input[type=color]::-webkit-color-swatch-wrapper {
     display: inline-block;
     width: 50px;
     height: 30px;
+}
+
+.buttons {
+    border-radius: 20px;
+    text-align: center;
+    margin: 30px auto auto;
+}
+
+button {
+    width: 180px;
+    height: 40px;
+    background-color: #e5e5e5;
+    border-radius: 7px;
+    border: lightgrey 1px solid;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+button:first-child {
+    margin-right: 8px;
+}
+
+button:hover {
+    opacity: 80%;
+}
+
+.success {
+    background-color: #99b577;
+    border: #8ca86a 1px solid;
 }

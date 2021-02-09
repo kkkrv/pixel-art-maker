@@ -3,30 +3,27 @@
 <head>
     <meta charset="utf-8">
     <title>Pixel Art Maker</title>
-    <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
     <main>
         <div id="canvas">
             <div id="gridCanvas"></div>
             <div id="palette">
-
                 <label for="customColor">Custom color: </label>
                 <input type="color" class="colorField" id="customColor" />
                 <label for="currentColor">CURRENT COLOR ></label>
                 <div id="currentColor"></div>
             </div>
-            <div class="buttons">
-                <button id="saveButton">Save</button>
-                <button id="clearButton">Clear</button>
-            </div>
         </div>
-
+        <div class="buttons">
+            <button id="saveButton" class="success">Save</button>
+            <button id="clearButton" class="clear">Clear</button>
+        </div>
     </main>
 
     <script src="app.js"></script>
-
 </body>
 </html>

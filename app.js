@@ -4,6 +4,7 @@ const indicator = document.getElementById("currentColor");
 const saveButton = document.getElementById("saveButton");
 const clearButton = document.getElementById("clearButton");
 const customColor = document.getElementById("customColor");
+
 let activeColor = 'red';
 indicator.style.backgroundColor = activeColor;
 let isDrawing = false;
@@ -61,7 +62,7 @@ saveButton.addEventListener('click', () => {
 // ===================== FUNCTIONS =======================
 
 function createPalette() {
-    const colors = [ 'maroon', 'darkred', 'red', 'tomato', 'lightcoral', 'lightpink', 'lightsalmon',
+    const colors = [ 'maroon', 'red', 'tomato', 'lightcoral', 'lightpink', 'lightsalmon',
         'sandybrown', 'sienna', 'peru', 'orangered', 'orange', 'goldenrod','gold',  'yellowgreen', 'olive',
         'green', 'seagreen', 'mediumaquamarine', 'darkcyan', 'cornflowerblue', 'blue', 'darkblue', 'blueviolet', 'slateblue',
         'darkorchid', 'darkmagenta', 'black', 'gray', 'lightgrey', 'white'];
