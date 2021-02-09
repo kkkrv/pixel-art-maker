@@ -2,6 +2,12 @@ body {
     background-color: #ccc;
 }
 
+label {
+    font-family: 'Poppins', sans-serif;
+    vertical-align: top;
+    margin-top: 10px;
+}
+
 #canvas {
     width: 900px;
     height: 650px;
@@ -14,7 +20,6 @@ body {
 }
 
 .element {
-    /* display: inline-block; */
     border: 1px solid #e5e5e5;
     border-width: 0 1px 1px 0;
     width: 9px;
@@ -38,7 +43,31 @@ body {
     display: inline-block;
     width: 30px;
     height: 30px;
-    border-radius: 15px;
+    border-radius: 50%;
     margin-right: 10px;
+    border: none;
     cursor: pointer;
+}
+
+.colorField:last-child {
+    margin-right: 0;
+}
+
+
+input[type=color]::-webkit-color-swatch {
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+}
+
+input[type=color]::-webkit-color-swatch-wrapper {
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+}
+
+#currentColor {
+    display: inline-block;
+    width: 50px;
+    height: 30px;
 }
