@@ -1,18 +1,28 @@
+import initialDrawing from "./defaultDrawing.js";
+import floodFill from "./flood.js";
+
 const canvasField = document.getElementById("gridCanvas");
 const paletteField = document.getElementById('palette');
 const indicator = document.getElementById("currentColor");
 const saveButton = document.getElementById("saveButton");
 const clearButton = document.getElementById("clearButton");
 const customColor = document.getElementById("customColor");
+const toolCheckbox = document.getElementById("tool");
 
 let activeColor = 'red';
 indicator.style.backgroundColor = activeColor;
 let isDrawing = false;
+let selectedTool = "brush";
 
-// ============== EVENT LISTENERS =====================
+// ================ EVENT LISTENERS =====================
 window.addEventListener('load', () => {
-    getDrawingFromStorage();
+    if (! getDrawingFromStorage()) draw(initialDrawing);
 })
+
+toolCheckbox.addEventListener("change", () => {
+    changeInstrument();
+})
+
 
 paletteField.addEventListener('click', (e) => {
     let el = e.target;
@@ -28,26 +38,6 @@ customColor.addEventListener("change", (e) => {
     indicator.style.backgroundColor = activeColor;
 })
 
-// Add the event listeners for mousedown, mousemove, and mouseup
-canvasField.addEventListener('mousedown', e => {let el = e.target;
-    e.preventDefault();
-    if (el.className === 'element') el.style.backgroundColor = activeColor;
-    isDrawing = true;
-});
-
-canvasField.addEventListener('mouseover', e => {
-    e.preventDefault();
-    if (isDrawing === true) {
-        let el = e.target;
-        if (el.className === 'element') el.style.backgroundColor = activeColor;
-    }
-});
-
-window.addEventListener('mouseup', () => {
-    if (isDrawing === true) {
-        isDrawing = false;
-    }
-});
 
 clearButton.addEventListener('click', () => {
     let pixels = document.getElementsByClassName("element");
@@ -59,12 +49,45 @@ clearButton.addEventListener('click', () => {
 saveButton.addEventListener('click', () => {
     setDrawingInStorage();
 })
+
+// Add the event listeners for mousedown, mousemove, and mouseup
+canvasField.addEventListener('mousedown', e => {let el = e.target;
+    e.preventDefault();
+    if (el.className === 'element' && selectedTool === "brush") el.style.backgroundColor = activeColor;
+    isDrawing = true;
+});
+
+canvasField.addEventListener('mouseover', e => {
+    e.preventDefault();
+    if (isDrawing === true) {
+        let el = e.target;
+        if (el.className === 'element' && selectedTool === "brush") el.style.backgroundColor = activeColor;
+    }
+});
+
+window.addEventListener('mouseup', () => {
+    if (isDrawing === true && selectedTool === "brush") {
+        isDrawing = false;
+    }
+});
+
+
+canvasField.addEventListener("click", (e) => {
+    let target = e.target;
+    if (selectedTool === "flood") {
+        let pixels = document.getElementsByClassName("element");
+        let x = Number(target["x-position"]);
+        let y = Number(target["y-position"]);
+        floodFill(pixels, x, y, activeColor);
+    }
+
+})
 // ===================== FUNCTIONS =======================
 
 function createPalette() {
-    const colors = [ 'maroon', 'red', 'tomato', 'lightcoral', 'lightpink', 'lightsalmon',
-        'sandybrown', 'sienna', 'peru', 'orangered', 'orange', 'goldenrod','gold',  'yellowgreen', 'olive',
-        'green', 'seagreen', 'mediumaquamarine', 'darkcyan', 'cornflowerblue', 'blue', 'darkblue', 'blueviolet', 'slateblue',
+    const colors = [ 'maroon', 'red', "tomato", 'coral', 'lightcoral', 'lightpink', 'lightsalmon',
+        'sandybrown', 'peru', 'orangered', 'orange', 'gold',  'yellowgreen', 'olive',
+        'green', 'seagreen', 'darkcyan', 'cornflowerblue', 'blue', 'darkblue', 'blueviolet', 'slateblue',
         'darkorchid', 'darkmagenta', 'black', 'gray', 'lightgrey', 'white'];
     for (let color of colors) {
         console.log(color);
@@ -82,19 +105,38 @@ function createGrid() {
     let ratioW = Math.floor(width / size),
         ratioH = Math.floor(height / size);
 
-    canvasField.style.width = String(ratioW  * size);
-    canvasField.style.height = String(ratioH  * size);
+    canvasField.style.width = String(ratioW * size);
+    canvasField.style.height = String(ratioH * size);
 
     for (let i = 0; i < ratioH; i++) {
+        let row = document.createElement("div");
+        row.className = "row";
         for(let p = 0; p < ratioW; p++){
             let el = document.createElement("div");
             el.className = "element";
             el["x-position"] = `${i}`;
             el["y-position"] = `${p}`;
-            canvasField.appendChild(el);
+            row.appendChild(el);
+        }
+        canvasField.appendChild(row);
+    }
+}
+
+function draw(savedPixels) {
+    let pixels = document.getElementsByClassName("element");
+    for (let pixel of pixels) {
+        for (let savedBlock of savedPixels) {
+            if (Number(pixel["x-position"]) === Number(savedBlock.x) && Number(pixel["y-position"]) === Number(savedBlock.y)) {
+                pixel.style.backgroundColor = savedBlock.color;
+            }
         }
     }
 }
+
+function changeInstrument() {
+    (selectedTool === "brush") ? selectedTool = "flood" : selectedTool = "brush";
+}
+
 
 // ================== WORK WITH LOCALSTORAGE ======================
 
@@ -114,17 +156,16 @@ function setDrawingInStorage() {
 }
 
 function getDrawingFromStorage() {
-    let drawing = JSON.parse(localStorage.getItem('drawing'));
-    let pixels = document.getElementsByClassName("element");
-    for (let pixel of pixels) {
-        for (let savedBlock of drawing) {
-            if (Number(pixel["x-position"]) === Number(savedBlock.x) && Number(pixel["y-position"]) === Number(savedBlock.y)) {
-                pixel.style.backgroundColor = savedBlock.color;
-            }
-        }
-    }
+    let savedPixels = JSON.parse(localStorage.getItem('drawing'));
 
+    if (savedPixels) {
+        draw(savedPixels);
+        return true
+    } else {
+        return false;
+    }
 }
+
 
 createGrid();
 createPalette();

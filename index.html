@@ -12,18 +12,24 @@
         <div id="canvas">
             <div id="gridCanvas"></div>
             <div id="palette">
-                <label for="customColor">Custom color: </label>
+                <label for="customColor">Choose: </label>
                 <input type="color" class="colorField" id="customColor" />
                 <label for="currentColor">CURRENT COLOR ></label>
                 <div id="currentColor"></div>
+                <label class="switch">
+                    <input id="tool" type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                <label for="tool">FLood Fill</label>
             </div>
         </div>
         <div class="buttons">
             <button id="saveButton" class="success">Save</button>
             <button id="clearButton" class="clear">Clear</button>
         </div>
+
     </main>
 
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
 </html>

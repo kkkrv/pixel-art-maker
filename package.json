@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "In this exercise, you'll create your own pixel art maker which will allow a user to choose colors from a palette and then paint pixel art. The interface is completely up to you, but it could look something like this.",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ."
@@ -20,5 +21,8 @@
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-kmcgrady": "^10.0.4"
+  },
+  "dependencies": {
+    "node": "^15.8.0"
   }
 }
