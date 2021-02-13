@@ -56,7 +56,6 @@ function getNeighbours(image, current) {
     return neighbours;
 }
 
-
 function getPixelByCoordinates(image, targetX, targetY) {
     let current;
     console.log(typeof image);
@@ -69,6 +68,5 @@ function getPixelByCoordinates(image, targetX, targetY) {
     }
     return current;
 }
-
 
 export default floodFill;
